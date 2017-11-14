@@ -9,9 +9,6 @@ export class FilterBox {
     window.fb = this;
   }
 
-  filtersChanged(n,o) {
-  }
-
   updateFilter(f) {
     var val = $(this.filterCB[f]).prop('checked');
     var nfo = {};

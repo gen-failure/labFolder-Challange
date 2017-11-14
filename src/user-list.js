@@ -12,7 +12,7 @@ class UserList {
     this.rowsVisibility = {};
     this.tableRows = {} ;
     this.newUser = {};
-
+    this.usersDigest = { total : 0, tags : []} //No pun intened
     let filters = [];
 
     this.availableTags.forEach((tag) => {
@@ -69,6 +69,11 @@ class UserList {
       this.activeFilters = nf;
       this._updateHash();
     }
+    
+    var newDigest = {total : 0, tags : {}}
+    this.availableTags.forEach((tag) => {
+      newDigest.tags[tag] = 0;
+    });
 
     var hidden = 0;
     this.users.forEach((user,i) => {
@@ -82,6 +87,12 @@ class UserList {
         }
       }
       if (match) {
+        newDigest.total++;
+        this.availableTags.forEach((tag) => {
+          if (user.tags[tag]) {
+            newDigest.tags[tag]++;
+          }
+        });
         this.rowsVisibility[user.id] = true;
         $(this.tableRows[user.id]).css('display','table-row');
       } else {
@@ -91,6 +102,7 @@ class UserList {
       }
     });
     this.hiddenRows = hidden;
+    this.usersDigest = newDigest;
   }
 
   _updateHash() {
