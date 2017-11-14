@@ -10,8 +10,7 @@ export class App {
     config.title = 'LF Challange app';
     config.options.root = '/';
     config.map([
-      { route: '', name : 'basic', moduleId : 'user-list'},
-      { route: '/filter/*tags', moduleId : 'user-list' }
+      { route: ['','/filter/*tags/sort/*route','/filter/sort/*route'], name : 'basic', moduleId : 'user-list', nav : false},
     ]);
   }
 }

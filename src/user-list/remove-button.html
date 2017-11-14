@@ -1,9 +1,10 @@
 <template>
-  <div show.bind="showConfirmDialog !== itemIndex">
+  <div show.bind="showConfirmDialog !== userId">
     <button class="btn-danger" click.trigger="onDelete($event)">Delete</button>
   </div>
-  <div show.bind="showConfirmDialog === itemIndex">
-    <button class="btn-danger" click.trigger="onDelete($event)">Yes</button>
-    <button class="btn-ok" click.trigger="onDelete($event)">No</button>
+  <div show.bind="showConfirmDialog === userId">
+    <span>Are you sure?</span>
+    <button class="btn-danger" click.trigger="performDelete($event)">Yes</button>
+    <button class="btn-ok">No</button>
   </div>
 </template>

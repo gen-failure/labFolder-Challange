@@ -14,7 +14,8 @@
     "bluebird": "^3.4.1",
     "datatables.net": "^1.10.16",
     "localforage": "^1.5.3",
-    "materialize-css": "^0.100.2"
+    "materialize-css": "^0.100.2",
+    "uuid": "^3.1.0"
   },
   "peerDependencies": {},
   "devDependencies": {

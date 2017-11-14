@@ -4,16 +4,17 @@ export class RemoveButton {
   @bindable showConfirmDialog;
   @bindable suggestFn;
   @bindable deleteFn;
-  @bindable itemIndex;
-
+  @bindable userId;
   constructor() {
   }
 
   onDelete(e) {
     e.stopPropagation();
-    this.suggestFn({index : this.itemIndex});
+    this.suggestFn({id : this.userId});
   }
-  showConfirmDialogChanged(n) {
-    console.log(n);
+
+  performDelete() {
+    console.log(this);
+    this.deleteFn({id : this.userId});
   }
 }

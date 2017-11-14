@@ -24,17 +24,17 @@
     </div>
     <div class="card">
       <div class="card-content">
-        <table class="bordered" ref="userTable">
+        <table class="bordered" ref="userTable" show.bind="users.length > 0">
           <thead>
             <tr>
-              <th>Name</th>
-              <th repeat.for="tag of availableTags">${tag}</th>
+              <th click.trigger="updateSorting('name')">Name</th>
+              <th repeat.for="tag of availableTags" click.trigger="updateSorting('tag',tag)">${tag}</th>
               <th class="center">Delete</th>
             </tr>
           </thead>
           <tbody>
           <!-- FIXME: I wanted to use a special component here to represent user record but the aurelia templating seems to has some issues with tbody -->
-            <tr repeat.for="user of users" style="display:${(rowsVisibility[$index] === true) ? 'table-row' : 'none'}" ref="tableRows[$index]">
+            <tr repeat.for="user of users" style="display:${(rowsVisibility[user.id] === true) ? 'table-row' : 'none'}" ref="tableRows[user.id]">
               <td>${user.name}</td>
               <td repeat.for="tag of availableTags">
                 <input type="checkbox" class="filled-in" id="ul-tag-${$parent.$index}-${$index}" checked.bind="user.tags[tag]" change.trigger="onUpdate()" />
@@ -42,11 +42,12 @@
                 <label for="ul-tag-${$parent.$index}-${$index}"></label>
               </td>
               <td class="center">
-                <remove-button delele-fn.call="deleteUser(index)" suggest-fn.call="suggestDelete(index)" show-confirm-dialog.bind="showConfirmDialog" item-index.bind="$index" />
+                <remove-button user-id.bind="user.id" delete-fn.call="deleteUser(id)" suggest-fn.call="suggestDelete(id)" show-confirm-dialog.bind="showConfirmDialog" />
               </td>
             </tr>
           </tbody>
         </table>
+        <p show.bind="users.length == 0">There are no records yet</p>
         <p show.bind="hiddenRows > 0">Hidden rows: ${hiddenRows}</p>
       </div>
     </div>
