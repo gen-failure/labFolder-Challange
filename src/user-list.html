@@ -1,0 +1,55 @@
+<template>
+  <require from="./user-list/sidebar"></require>
+  <require from="./user-list/filter-box"></require>
+  <require from="./user-list/remove-button"></require>
+  <require from="./resources/value-converters/users-digest"></require>
+  <sidebar digest.bind="users | usersDigest"></sidebar>
+  <section>
+    <div class="card">
+      <div class="card-content">
+        <div class="thin-row">
+          <div class="input-field col m6 s12">
+            <input type="text" placeholder="User name" id="nu_name" value.bind="newUser.name" />
+            <label for="nu_name">Name of new user</label>
+          </div>
+          <div class="input-field col s4 m2" repeat.for="tag of availableTags">
+            <input type="checkbox" id='nu-tag-${$index}' class="filled-in" checked.bind="newUser.tags[tag]" />
+            <label for="nu-tag-${$index}">${tag}</label>
+          </div>
+        </div>
+      </div>
+      <div class="card-action">
+        <button class="btn" click.trigger="addUser()">Add</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <table class="bordered" ref="userTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th repeat.for="tag of availableTags">${tag}</th>
+              <th class="center">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+          <!-- FIXME: I wanted to use a special component here to represent user record but the aurelia templating seems to has some issues with tbody -->
+            <tr repeat.for="user of users" style="display:${(rowsVisibility[$index] === true) ? 'table-row' : 'none'}" ref="tableRows[$index]">
+              <td>${user.name}</td>
+              <td repeat.for="tag of availableTags">
+                <input type="checkbox" class="filled-in" id="ul-tag-${$parent.$index}-${$index}" checked.bind="user.tags[tag]" change.trigger="onUpdate()" />
+                <!-- Not nice, but empty label is needed by materialize for input to work -->
+                <label for="ul-tag-${$parent.$index}-${$index}"></label>
+              </td>
+              <td class="center">
+                <remove-button delele-fn.call="deleteUser(index)" suggest-fn.call="suggestDelete(index)" show-confirm-dialog.bind="showConfirmDialog" item-index.bind="$index" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p show.bind="hiddenRows > 0">Hidden rows: ${hiddenRows}</p>
+      </div>
+    </div>
+    <filter-box filters.bind="activeFilters" update-fn.call="updateFilters(nf)"></filter-box>
+  </section>
+</template>

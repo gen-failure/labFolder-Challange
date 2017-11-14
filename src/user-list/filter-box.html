@@ -1,0 +1,14 @@
+<template>
+  <require from="../resources/value-converters/object-keys"></require>
+  <div class="card">
+    <div class="card-content">
+      <p>Filter</p>
+      <div class="thin-row">
+        <div class="input-field m2 s4 col" repeat.for="f of filters | objectKeys">
+          <input type="checkbox" class="filled-in" id="filter-cb-${$index}" change.trigger="updateFilter(f)" ref="filterCB[f]" />
+          <label for="filter-cb-${$index}">${f}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

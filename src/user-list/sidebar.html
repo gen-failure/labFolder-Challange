@@ -1,0 +1,8 @@
+<template>
+  <require from="../resources/value-converters/object-keys"></require>
+  <ul id="userlist-sidebar" class="side-nav fixed right-aligned">
+    <li class="lime"><a>Total persons : ${digest.total}</a></li>
+    <li repeat.for="tag of digest.tags | objectKeys"><a>${tag} : ${digest.tags[tag]}</a></li>
+  </ul>
+  <a href="#" data-activates="userlist-sidebar" class="button-collapse btn-floating hide-on-large right" ref="toggleLink"><i class="material-icons">menu</i></a>
+</template>
