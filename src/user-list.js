@@ -66,7 +66,8 @@ class UserList {
 
   updateFilters(nf) {
     if (typeof nf === 'object') {
-      this.activeFilters = nf;
+      var o = Object.assign({},nf);
+      this.activeFilters = o;
       this._updateHash();
     }
     
@@ -78,7 +79,6 @@ class UserList {
     var hidden = 0;
     this.users.forEach((user,i) => {
       var match = true;
-    //We are using old school for loop because we 
       for(let i = 0; i< this.availableTags.length;i++) {
         var tag = this.availableTags[i];
         if (this.activeFilters[tag] && !user.tags[tag]) {

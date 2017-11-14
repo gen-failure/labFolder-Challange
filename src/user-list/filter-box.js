@@ -1,12 +1,16 @@
 import {bindable} from 'aurelia-framework';
 
 export class FilterBox {     
-  @bindable filters;
+  @bindable({changeHandler : 'filtersChanged'}) filters;
   @bindable updateFn;
   constructor() {
     this.filterCB = {};
     this.filters = {};
     window.fb = this;
+  }
+
+  filtersChanged() {
+    this._updateCheckboxes();
   }
 
   updateFilter(f) {
