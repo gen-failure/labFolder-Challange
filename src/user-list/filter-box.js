@@ -10,7 +10,6 @@ export class FilterBox {
   }
 
   filtersChanged(n,o) {
-    this._updateCheckboxes
   }
 
   updateFilter(f) {
