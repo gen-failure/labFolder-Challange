@@ -36,7 +36,6 @@ class UserList {
   }
 
   suggestDelete(id) {
-    console.log(id)
     var i = this.users.findIndex((u) => {return (u.id === id)});
     if (i !== -1) this.showConfirmDialog=id;
   }
@@ -58,9 +57,6 @@ class UserList {
     if (field === this.sortBy && ((field == 'name') || this.sortByTag == tagName)) {
       this.sortOrder = !this.sortOrder;
     } else {
-      console.log(field);
-      console.log(this.sortBy);
-      console.log('---------');
       this.sortOrder = true;
       this.sortBy = field;
       this.sortByTag = tagName
@@ -98,7 +94,6 @@ class UserList {
   }
 
   _updateHash() {
-    console.log('updating hash');
     var newHash = 'filter/';
     this.availableTags.forEach((tag) => {
       if (this.activeFilters[tag]) {
@@ -165,7 +160,6 @@ class UserList {
 
   // AU Callbacks
   activate(params) {
-    console.log('user list activation callback');
     if (params.tags) {
       var tags = params.tags.split('/');
       tags.forEach((tag) => {

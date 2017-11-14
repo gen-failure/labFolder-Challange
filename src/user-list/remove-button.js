@@ -14,7 +14,6 @@ export class RemoveButton {
   }
 
   performDelete() {
-    console.log(this);
     this.deleteFn({id : this.userId});
   }
 }
