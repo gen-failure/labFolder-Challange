@@ -12,14 +12,15 @@ class UserList {
     this.rowsVisibility = {};
     this.tableRows = {} ;
     this.newUser = {};
-    this.usersDigest = { total : 0, tags : []} //No pun intened
-    let filters = [];
-
+    this.usersDigest = { total : 0, tags : {}} //No pun intened
     this.availableTags.forEach((tag) => {
-      filters[tag] = false;
+      this.usersDigest[tag] = 0;
+    });
+    this.activeFilters = {};
+    this.availableTags.forEach((tag) => {
+      this.activeFilters[tag] = false;
     });
 
-    this.activeFilters = filters;
     this._createEmptyUserModel();
     this.showConfirmDialog = false
     window.ul = this;

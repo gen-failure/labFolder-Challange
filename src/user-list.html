@@ -50,6 +50,6 @@
         <p show.bind="hiddenRows > 0">Hidden rows: ${hiddenRows}</p>
       </div>
     </div>
-    <filter-box filters.bind="activeFilters" update-fn.call="updateFilters(nf)"></filter-box>
+    <filter-box filters.bind="activeFilters" update-fn.call="updateFilters(nf)" show.bind="users.length > 0"></filter-box>
   </section>
 </template>
