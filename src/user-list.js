@@ -72,20 +72,23 @@ class UserList {
     }
     
     var newDigest = {total : 0, tags : {}}
+    var visibility = {};
     this.availableTags.forEach((tag) => {
       newDigest.tags[tag] = 0;
     });
 
     var hidden = 0;
-    this.users.forEach((user,i) => {
+    this.users.forEach((user) => {
+      console.log('rendering ' + user.name);
       var match = true;
-      for(let i = 0; i< this.availableTags.length;i++) {
+      for(let i = 0; i < this.availableTags.length;i++) {
         var tag = this.availableTags[i];
-        if (this.activeFilters[tag] && !user.tags[tag]) {
+        if (this.activeFilters[tag] == true && user.tags[tag] === false) {
           match = false;
           break;
         }
       }
+      console.log(match);
       if (match) {
         newDigest.total++;
         this.availableTags.forEach((tag) => {
@@ -93,16 +96,15 @@ class UserList {
             newDigest.tags[tag]++;
           }
         });
-        this.rowsVisibility[user.id] = true;
-        $(this.tableRows[user.id]).css('display','table-row');
+        visibility[user.id] = true;
       } else {
-        this.rowsVisibility[user.id] = false;
-        $(this.tableRows[user.id]).css('display','none');
+        visibility[user.id] = false;
         hidden++;
       }
     });
     this.hiddenRows = hidden;
     this.usersDigest = newDigest;
+    this.rowsVisibility = visibility;
   }
 
   _updateHash() {

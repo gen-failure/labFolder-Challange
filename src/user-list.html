@@ -33,7 +33,7 @@
           </thead>
           <tbody>
           <!-- FIXME: I wanted to use a special component here to represent user record but the aurelia templating seems to has some issues with tbody -->
-            <tr repeat.for="user of users" style="display:${(rowsVisibility[user.id] === true) ? 'table-row' : 'none'}" ref="tableRows[user.id]">
+            <tr repeat.for="user of users" show.bind="rowsVisibility[user.id]" ref="tableRows[user.id]">
               <td>${user.name}</td>
               <td repeat.for="tag of availableTags">
                 <input type="checkbox" class="filled-in" id="ul-tag-${$parent.$index}-${$index}" checked.bind="user.tags[tag]" change.trigger="onUpdate()" />
